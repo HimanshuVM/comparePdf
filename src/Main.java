@@ -2,6 +2,7 @@ import de.redsix.pdfcompare.CompareResult;
 import de.redsix.pdfcompare.CompareResultWithPageOverflow;
 import de.redsix.pdfcompare.PdfComparator;
 
+
 import java.io.IOException;
 
 public class Main {
@@ -10,13 +11,15 @@ public class Main {
         String expPdf = "resource\\137057-MXSW1047 OLD-AP.pdf";
         String actPdf = "resource\\137057-MXSW1047 NEW-AP.pdf";
 
-        String resultPdf = "C:\\Users\\Admin\\Downloads\\Result.pdf";
+        String resultPdf = "resource\\Result.pdf";
 
         final PdfComparator pdfResult = new PdfComparator(expPdf, actPdf, new CompareResultWithPageOverflow());
 
         final CompareResult result = pdfResult.getResult();
+
         if (result.isNotEqual()) {
             System.out.println("Differences found!");
+            pdfResult.getResult().writeTo(resultPdf);
         }
         if (result.isEqual()) {
             System.out.println("No Differences found!");
